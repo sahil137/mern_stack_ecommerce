@@ -4,9 +4,14 @@ import cors from 'cors';
 
 // index route import
 import indexRoute from './routes/indexRoute.js';
+import connectToDatabase from './config/mongoose.js';
+
 const app = express();
 
 dotenv.config({ path: 'server/config/.env' });
+
+// connecting to database
+connectToDatabase();
 
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(express.json({ limit: '30mb', extended: true }));
