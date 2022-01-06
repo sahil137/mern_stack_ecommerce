@@ -7,6 +7,13 @@ import indexRoute from './routes/indexRoute.js';
 import connectToDatabase from './config/mongoose.js';
 import { errorMiddleware } from './middleware/error.js';
 
+// handle uncaught exception
+process.on('uncaughtException', (error) => {
+  console.log(`Error: ${error.message}`);
+  console.log(`Shutting down the server due to uncaught exception`);
+  process.exit(1);
+});
+
 const app = express();
 
 dotenv.config({ path: 'server/config/.env' });
@@ -23,6 +30,15 @@ app.use('/', indexRoute);
 // error middleware
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
+});
+
+// unhandled promise rejection
+process.on('unhandledRejection', (error) => {
+  console.log(`Error: ${error.message}`);
+  console.log(`Shutting down the server due to unhandled promise rejection`);
+  server.close(() => {
+    process.exit(1);
+  });
 });

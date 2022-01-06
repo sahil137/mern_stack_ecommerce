@@ -8,9 +8,6 @@ const connectToDatabase = () => {
     })
     .then(() => {
       console.log('Connected to database :: MongoDB');
-    })
-    .catch((error) => {
-      console.log(error);
     });
 };
 
