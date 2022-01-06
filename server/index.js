@@ -5,6 +5,7 @@ import cors from 'cors';
 // index route import
 import indexRoute from './routes/indexRoute.js';
 import connectToDatabase from './config/mongoose.js';
+import { errorMiddleware } from './middleware/error.js';
 
 const app = express();
 
@@ -18,6 +19,10 @@ app.use(express.json({ limit: '30mb', extended: true }));
 app.use(cors());
 
 app.use('/', indexRoute);
+
+// error middleware
+app.use(errorMiddleware);
+
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port: ${process.env.PORT}`);
 });
