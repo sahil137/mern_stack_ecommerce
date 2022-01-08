@@ -188,3 +188,21 @@ export const updatePassword = async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 };
+
+// update user details
+export const updateProfile = async (req, res, next) => {
+  const { name, email } = req.body;
+  try {
+    const newUserData = {
+      name,
+      email,
+    };
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({ success: true });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};

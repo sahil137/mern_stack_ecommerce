@@ -7,6 +7,7 @@ import {
   signOut,
   signUp,
   updatePassword,
+  updateProfile,
 } from '../controllers/userController.js';
 import { isUserAuthenticated, userAuthRoles } from '../middleware/auth.js';
 
@@ -19,5 +20,6 @@ router.post('/password/forgot', forgotPassword);
 router.post('/password/reset/:token', resetPassword);
 router.patch('/password/update', isUserAuthenticated, updatePassword);
 router.get('/userProfile', isUserAuthenticated, getUserDetails);
+router.patch('/userProfile/update', isUserAuthenticated, updateProfile);
 
 export default router;
