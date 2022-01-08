@@ -1,6 +1,9 @@
 import express from 'express';
 import {
+  deleteUser,
   forgotPassword,
+  getAllUsers,
+  getSingleUser,
   getUserDetails,
   resetPassword,
   signIn,
@@ -8,6 +11,7 @@ import {
   signUp,
   updatePassword,
   updateProfile,
+  updateUserRole,
 } from '../controllers/userController.js';
 import { isUserAuthenticated, userAuthRoles } from '../middleware/auth.js';
 
@@ -21,5 +25,31 @@ router.post('/password/reset/:token', resetPassword);
 router.patch('/password/update', isUserAuthenticated, updatePassword);
 router.get('/userProfile', isUserAuthenticated, getUserDetails);
 router.patch('/userProfile/update', isUserAuthenticated, updateProfile);
+
+router.get(
+  '/admin/getAllUsers',
+  isUserAuthenticated,
+  userAuthRoles('admin'),
+  getAllUsers
+);
+router.get(
+  '/admin/getSingleUser/:id',
+  isUserAuthenticated,
+  userAuthRoles('admin'),
+  getSingleUser
+);
+
+router.patch(
+  '/admin/updateUserRole/:id',
+  isUserAuthenticated,
+  userAuthRoles('admin'),
+  updateUserRole
+);
+router.delete(
+  '/admin/deleteUser/:id',
+  isUserAuthenticated,
+  userAuthRoles('admin'),
+  deleteUser
+);
 
 export default router;

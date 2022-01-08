@@ -206,3 +206,70 @@ export const updateProfile = async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 };
+
+// get all users :: ADMIN
+export const getAllUsers = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      success: true,
+      users,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
+
+// get single user with id :: ADMIN
+export const getSingleUser = async (req, res, next) => {
+  const { id } = req.params.id;
+  try {
+    const user = await User.find(id);
+    if (!user) {
+      return next(new ErrorHandler(`User does not exist with id: ${id}`));
+    }
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
+
+// update user role :: ADMIN
+export const updateUserRole = async (req, res, next) => {
+  const { name, email, role } = req.body;
+  const { id } = req.params;
+  try {
+    const newUserData = {
+      name,
+      email,
+      role,
+    };
+    await User.findByIdAndUpdate(id, newUserData, {
+      new: true,
+      runValidators: true,
+    });
+    res.status(200).json({ success: true });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
+
+// delete user :: ADMIN
+export const deleteUser = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return next(new ErrorHandler(`User doesnot exist with id: ${id}`));
+    }
+    await user.remove();
+    res
+      .status(200)
+      .json({ success: true, message: 'User Deleted Successfully' });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
