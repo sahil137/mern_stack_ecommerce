@@ -1,8 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-// index route import
 import indexRoute from './routes/indexRoute.js';
 import connectToDatabase from './config/mongoose.js';
 import { errorMiddleware } from './middleware/error.js';
@@ -24,6 +24,8 @@ connectToDatabase();
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(express.json({ limit: '30mb', extended: true }));
 app.use(cors());
+
+app.use(cookieParser());
 
 app.use('/', indexRoute);
 

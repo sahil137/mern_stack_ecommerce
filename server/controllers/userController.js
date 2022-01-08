@@ -56,3 +56,19 @@ export const signIn = async (req, res, next) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// Logout the user
+export const signOut = async (req, res, next) => {
+  try {
+    res.cookie('token', null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    });
+    res.status(200).json({
+      success: true,
+      message: 'Logged Out',
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
