@@ -2,7 +2,8 @@ import ErrorHandler from '../utils/errorHandler.js';
 import jwt from 'jsonwebtoken';
 import User from '../models/userModel.js';
 
-const isUserAuthenticated = async (req, res, next) => {
+// To check if user if logged in
+export const isUserAuthenticated = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     if (!token) {
@@ -18,4 +19,17 @@ const isUserAuthenticated = async (req, res, next) => {
   }
 };
 
-export default isUserAuthenticated;
+// check if user matches the passed role
+export const userAuthRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorHandler(
+          `${req.user.role} role is not allowed to access this resource`,
+          403
+        )
+      );
+    }
+    next();
+  };
+};
