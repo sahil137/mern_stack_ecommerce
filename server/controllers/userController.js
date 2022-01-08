@@ -149,3 +149,42 @@ export const resetPassword = async (req, res, next) => {
     return next(new ErrorHandler(error.message, 500));
   }
 };
+
+// get user details
+
+export const getUserDetails = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
+
+// update user password
+export const updatePassword = async (req, res, next) => {
+  const { confirmPassword, newPassword, confirmNewPassword } = req.body;
+  try {
+    const user = await User.findById(req.user.id);
+
+    const isPasswordCorrect = await bcrypt.compare(
+      confirmPassword,
+      user.password
+    );
+    if (!isPasswordCorrect) {
+      return next(new ErrorHandler('Incorrect password entered', 400));
+    }
+    if (newPassword !== confirmNewPassword) {
+      return next(new ErrorHandler('Password does not match', 400));
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    await user.save();
+    sendToken(user, 200, res);
+  } catch (error) {
+    return next(new ErrorHandler(error.message, 500));
+  }
+};
