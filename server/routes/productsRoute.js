@@ -1,8 +1,11 @@
 import express from 'express';
 import {
   createProduct,
+  createProductReview,
   deleteProduct,
+  deleteReview,
   getProductDetails,
+  getProductReviews,
   getProducts,
   updateProduct,
 } from '../controllers/productController.js';
@@ -12,7 +15,9 @@ const router = express.Router();
 
 router.get('/', getProducts);
 router.get('/:id', getProductDetails);
-
+router.put('/review', isUserAuthenticated, createProductReview);
+router.get('/review/:id', getProductReviews);
+router.delete('/review', isUserAuthenticated, deleteReview);
 router.post(
   '/create',
   isUserAuthenticated,
