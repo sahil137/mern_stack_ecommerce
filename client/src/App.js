@@ -4,6 +4,8 @@ import React, { useEffect } from 'react';
 import WebFont from 'webfontloader';
 import Header from './components/Layout/Header/Header';
 import Footer from './components/Layout/Footer/Footer';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/Layout/Home/Home';
 
 const App = () => {
   useEffect(() => {
@@ -16,6 +18,9 @@ const App = () => {
   return (
     <>
       <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
       <Footer />
     </>
   );
