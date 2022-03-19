@@ -3,6 +3,7 @@ import { CgMouse } from 'react-icons/cg';
 
 import '../../assets/css/home.css';
 import Product from './Product';
+import MetaData from '../Layout/MetaData';
 
 // Temporary
 const product = {
@@ -19,6 +20,7 @@ const product = {
 const Home = () => {
   return (
     <>
+      <MetaData title="Blinkart" />
       <div className="banner">
         <p>Welcome to Ecommerce</p>
         <h1>Have a look at our amazing products</h1>
