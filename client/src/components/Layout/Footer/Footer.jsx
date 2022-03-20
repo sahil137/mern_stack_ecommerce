@@ -12,16 +12,16 @@ const Footer = () => {
         <img src={appStore} alt="App Store" />
       </div>
       <div className="mid-footer">
-        <h1>Ecommerce</h1>
+        <h1>Binkart</h1>
         <p>Quality with Quantity</p>
 
         <p>Copyrights 2022 &copy; Sahil</p>
       </div>
       <div className="right-footer">
         <h4>Follow us</h4>
-        <a href="www.google.com">Instagram</a>
-        <a href="www.google.com">Youtube</a>
-        <a href="www.google.com">Facebook</a>
+        <a href="https://www.google.com">Instagram</a>
+        <a href="https://www.google.com">Youtube</a>
+        <a href="https://www.google.com">Facebook</a>
       </div>
     </footer>
   );

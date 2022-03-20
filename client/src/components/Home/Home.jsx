@@ -8,16 +8,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getProducts } from '../../redux/actions/productAction';
 import Loader from '../Layout/Loader/Loader';
 
+import { useAlert } from 'react-alert';
 const Home = () => {
+  const alert = useAlert();
   const dispatch = useDispatch();
 
   const state = useSelector((state) => state.productReducer);
 
-  const { products, loading } = state;
+  const { products, loading, error } = state;
 
   useEffect(() => {
+    if (error) {
+      return alert.error(error);
+    }
     dispatch(getProducts());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
   return (
     <>
       {loading ? (
