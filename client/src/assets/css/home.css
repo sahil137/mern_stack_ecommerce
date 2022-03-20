@@ -81,6 +81,8 @@
   margin: 2vmax;
   transition: all 0.5s;
   padding-bottom: 0.5vmax;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .product-card img {
