@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-
+import './App.css';
 // import { Route, Routes } from 'react-router-dom';
 import WebFont from 'webfontloader';
 import Header from './components/Layout/Header/Header';
 import Footer from './components/Layout/Footer/Footer';
 import { Routes, Route } from 'react-router-dom';
-import Home from './components/Layout/Home/Home';
+import Home from './components/Home/Home';
 
 const App = () => {
   useEffect(() => {
