@@ -6,36 +6,43 @@ import MetaData from '../Layout/MetaData';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getProducts } from '../../redux/actions/productAction';
+import Loader from '../Layout/Loader/Loader';
 
 const Home = () => {
   const dispatch = useDispatch();
 
   const state = useSelector((state) => state.productReducer);
 
-  const { products } = state;
+  const { products, loading } = state;
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
   return (
     <>
-      <MetaData title="Blinkart" />
-      <div className="banner">
-        <p>Welcome to Ecommerce</p>
-        <h1>Have a look at our amazing products</h1>
-        <a href="#container">
-          <button>
-            Scroll <CgMouse />
-          </button>
-        </a>
-      </div>
-      <h2 className="home-heading">Featured Products</h2>
-      <div className="container" id="container">
-        {products &&
-          products.map((product) => (
-            <Product key={product._id} product={product} />
-          ))}
-      </div>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <MetaData title="Blinkart" />
+          <div className="banner">
+            <p>Welcome to Blinkart</p>
+            <h1>Have a look at our products</h1>
+            <a href="#container">
+              <button>
+                Take me there <CgMouse />
+              </button>
+            </a>
+          </div>
+          <h2 className="home-heading">Featured Products</h2>
+          <div className="container" id="container">
+            {products &&
+              products.map((product) => (
+                <Product key={product._id} product={product} />
+              ))}
+          </div>
+        </>
+      )}
     </>
   );
 };
