@@ -5,11 +5,13 @@ import ReactStars from 'react-rating-stars-component';
 const Product = (props) => {
   const { product } = props;
 
+  console.log(product);
+
   const options = {
     edit: false,
     color: 'rgba(20, 20, 20, 0.1)',
     activeColor: 'tomato',
-    value: 2.5,
+    value: product.rating,
     isHalf: true,
     size: 20,
   };
@@ -19,9 +21,9 @@ const Product = (props) => {
       <img src={product.images[0].url} alt={product.name} />
       <p>{product.name}</p>
       <div className="stars-container">
-        <ReactStars {...options} /> <span>300 reviews</span>
+        <ReactStars {...options} /> <span>{product.numOfReviews} reviews</span>
       </div>
-      <span>Rs {product.price}</span>
+      <span>₹{product.price}</span>
     </Link>
   );
 };
