@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { CgMouse } from 'react-icons/cg';
 import '../../assets/css/home.css';
-import Product from './Product';
+import Product from '../Product/Product';
 import MetaData from '../Layout/MetaData';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -9,6 +9,7 @@ import { getProducts } from '../../redux/actions/productAction';
 import Loader from '../Layout/Loader/Loader';
 
 import { useAlert } from 'react-alert';
+
 const Home = () => {
   const alert = useAlert();
   const dispatch = useDispatch();

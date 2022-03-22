@@ -5,7 +5,7 @@ import ReactStars from 'react-rating-stars-component';
 const Product = (props) => {
   const { product } = props;
 
-  console.log(product);
+  // console.log(product);
 
   const options = {
     edit: false,
@@ -17,7 +17,7 @@ const Product = (props) => {
   };
 
   return (
-    <Link className="product-card" to={product._id}>
+    <Link className="product-card" to={`product/${product._id}`}>
       <img src={product.images[0].url} alt={product.name} />
       <p>{product.name}</p>
       <div className="stars-container">
