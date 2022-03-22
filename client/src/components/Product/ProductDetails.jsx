@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getProductDetails } from '../../redux/actions/productAction';
+import {
+  clearErrors,
+  getProductDetails,
+} from '../../redux/actions/productAction';
 import Carousel from 'react-material-ui-carousel';
 import ReactStars from 'react-rating-stars-component';
 import '../../assets/css/product_details.css';
@@ -30,7 +33,8 @@ const ProductDetails = () => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProductDetails(id));
   }, [dispatch, id, alert, error]);

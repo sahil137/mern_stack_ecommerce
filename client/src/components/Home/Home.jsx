@@ -5,7 +5,7 @@ import Product from '../Product/Product';
 import MetaData from '../Layout/MetaData';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getProducts } from '../../redux/actions/productAction';
+import { clearErrors, getProducts } from '../../redux/actions/productAction';
 import Loader from '../Layout/Loader/Loader';
 
 import { useAlert } from 'react-alert';
@@ -20,7 +20,8 @@ const Home = () => {
 
   useEffect(() => {
     if (error) {
-      return alert.error(error);
+      alert.error(error);
+      dispatch(clearErrors());
     }
     dispatch(getProducts());
   }, [dispatch, error, alert]);
