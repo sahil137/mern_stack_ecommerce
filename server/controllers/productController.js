@@ -41,7 +41,7 @@ export const getProductDetails = async (req, res, next) => {
     if (!product) {
       return next(new ErrorHandler('Product not Found', 404));
     }
-    console.log(product);
+    // console.log(product);
     res.status(200).json({ success: true, product });
   } catch (error) {
     return next(new ErrorHandler(error.message, 404));
