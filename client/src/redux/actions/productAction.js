@@ -11,12 +11,20 @@ import {
 
 // action to get list of all products
 export const getProducts =
-  (keyword = '', currentPage = 1) =>
+  (keyword = '', currentPage = 1, price = [0, 25000], category, rating = 0) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-      const { data } = await api.fetchAllProducts(keyword, currentPage);
+      const { data } = category
+        ? await api.fetchAllProductsCategory(
+            keyword,
+            currentPage,
+            price,
+            category,
+            rating
+          )
+        : await api.fetchAllProducts(keyword, currentPage, price, rating);
 
       dispatch({
         type: ALL_PRODUCTS_SUCCESS,

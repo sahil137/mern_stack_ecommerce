@@ -39,7 +39,7 @@
 
 .detailsBlock-1 > p {
   color: rgba(54, 54, 54, 0.582);
-  font: 200 0.6vmax cursive;
+  font: 200 0.6vmax;
 }
 
 .detailsBlock-2 {
@@ -53,7 +53,7 @@
 }
 
 .detailsBlock-2-span {
-  font: 200 0.8vmax cursive;
+  font: 200 0.8vmax;
   color: rgba(0, 0, 0, 0.699);
 }
 
@@ -175,7 +175,6 @@
 
 .reviewCard {
   flex: none;
-
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.226);
   border: 1px solid rgba(56, 56, 56, 0.116);
   width: 30vmax;
@@ -194,7 +193,7 @@
 }
 .reviewCardComment {
   color: rgba(0, 0, 0, 0.445);
-  font: 300 0.8vmax cursive;
+  font: 300 0.8vmax;
 }
 
 .noReviews {
@@ -285,193 +284,6 @@
     font: 600 3vw 'Roboto';
   }
   .reviewCardComment {
-    font: 300 5vw cursive;
+    font: 300 5vw;
   }
 }
-
-/* .productDetails {
-  border: 1px solid blue;
-  width: 100vw;
-  max-width: 100%;
-  padding: 6vmax;
-  box-sizing: border-box;
-  display: flex;
-}
-
-.carousel-container,
-.product-details-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 2vmax;
-  border: 1px solid black;
-}
-
-.product-details-section {
-  align-items: flex-start;
-}
-.carousel {
-  height: 100%;
-  width: 80%;
-}
-.carousel-image {
-  height: 100%;
-  width: 100%;
-  min-height: 50%;
-  min-width: 50%;
-}
-
-.detailsBlock-1 > h2 {
-  color: rgb(54, 54, 54);
-  font: 200 1.5rem 'Roboto';
-}
-
-.detailsBlock-1 > p {
-  color: rgba(54, 54, 54, 0.5);
-  font: 200 1vmax 'Roboto';
-}
-
-.detailsBlock-2 {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border-top: 1px solid rgba(0, 0, 0);
-  border-bottom: 1px solid rgba(0, 0, 0);
-  width: 60%;
-  padding: 1rem;
-}
-
-.detailsBlock-2 > span {
-  color: rgb(54, 54, 54);
-}
-
-.detailsBlock-3 > h2 {
-  color: rgba(17, 17, 17, 0.7);
-  font: 400 1.5rem;
-  margin: 1rem;
-}
-
-.detailsBlock-3-1 {
-  display: flex;
-  align-items: center;
-}
-
-.detailsBlock-3-1-1 > button {
-  border: none;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0.5vmax;
-  color: white;
-  cursor: pointer;
-  transition: all 0.5s;
-}
-
-.detailsBlock-3-1-1 > button :hover {
-  background-color: rgba(0, 0, 0, 0.7);
-}
-
-.detailsBlock-3-1-1 > input {
-  border: none;
-  padding: 0.5vmax;
-  width: 1vmax;
-  text-align: center;
-  outline: none;
-  font: 400 0.8vmax 'Roboto';
-  color: black;
-}
-.detailsBlock-3-1 > button:last-child {
-  border: none;
-  cursor: pointer;
-  color: white;
-  transition: all 0.5s;
-  background-color: tomato;
-  font: 500 0.7vmax 'Roboto';
-  border-radius: 3rem;
-  padding: 0.5vmax 2vmax;
-  margin: 1vmax;
-  outline: none;
-}
-
-.detailsBlock-3-1 > button:last-child:hover {
-  background-color: rgb(228, 46, 14);
-}
-
-.detailsBlock-3 > p {
-  border-top: 1px solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  padding: 1vmax 0;
-  color: rgba(0, 0, 0, 0.2);
-  font: 400 1vmax 'Roboto';
-  margin: 1vmax auto;
-}
-
-.submit-review {
-  width: 10rem;
-  border: none;
-  background-color: tomato;
-  border-radius: 2rem;
-  padding: 1rem 0.5rem;
-  margin: 1rem 0;
-  color: white;
-  cursor: pointer;
-  transition: all 0.5s;
-  outline: none;
-}
-
-.submit-review:hover {
-  transform: scale(1.1);
-}
-
-@media screen and (max-width: 600px) {
-  .productDetails {
-    flex-direction: column;
-  }
-
-  .productDetails > div:last-child {
-    align-items: center;
-  }
-
-  .detailsBlock-1 > h2 {
-    text-align: center;
-  }
-
-  .detailsBlock-1 > p {
-    text-align: center;
-    font-size: 1vmax;
-  }
-
-  .detailsBlock-2 {
-    justify-content: center;
-  }
-
-  .detailsBlock-3-1 {
-    flex-direction: column;
-  }
-  .detailsBlock-3-1-1 > button {
-    padding: 1.2vmax;
-    width: 4vmax;
-  }
-  .detailsBlock-3-1-1 > input {
-    padding: 1.5vmax;
-    width: 3vmax;
-  }
-
-  .detailsBlock-3-1 > button:last-child {
-    padding: 1.5vmax;
-    width: 20vmax;
-    margin: 3vmax 0;
-  }
-
-  .detailsBlock-3 > p {
-    padding: 2.5vmax 0;
-    text-align: center;
-  }
-
-  .submit-review {
-    padding: 1.5vmax;
-    width: 20vmax;
-    margin: 3vmax 0;
-  }
-} */

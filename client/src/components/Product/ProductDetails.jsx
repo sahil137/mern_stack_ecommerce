@@ -11,6 +11,7 @@ import '../../assets/css/product_details.css';
 import Loader from '../Layout/Loader/Loader';
 import ReviewCard from './ReviewCard';
 import { useAlert } from 'react-alert';
+import MetaData from '../Layout/MetaData';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ const ProductDetails = () => {
         <Loader />
       ) : (
         <>
+          <MetaData title={`${product.name} Blinkart`} />
           <div className=" productDetails">
             <div>
               <Carousel className="carousel">
@@ -90,7 +92,8 @@ const ProductDetails = () => {
                 </strong>
               </div>
               <div className="detailsBlock-4">
-                Description: <p>{product.description}</p>
+                Description:
+                <p>{product.description}</p>
               </div>
               <button className="submit-review">Submit Review</button>
             </div>

@@ -23,12 +23,22 @@ export const getProducts = async (req, res, next) => {
     const numberOfProducts = await Product.countDocuments();
     const apiFeature = new ApiFeatures(Product.find(), req.query)
       .search()
-      .filter()
-      .pagination(resultPerPage);
-    const products = await apiFeature.query;
-    res
-      .status(200)
-      .json({ success: true, products, numberOfProducts, resultPerPage });
+      .filter();
+    let products = await apiFeature.query;
+
+    let filteredProductsCount = products.length;
+
+    apiFeature.pagination(resultPerPage);
+
+    products = await apiFeature.query.clone();
+
+    res.status(200).json({
+      success: true,
+      products,
+      numberOfProducts,
+      resultPerPage,
+      filteredProductsCount,
+    });
   } catch (error) {
     return next(new ErrorHandler(error.message, 404));
   }
