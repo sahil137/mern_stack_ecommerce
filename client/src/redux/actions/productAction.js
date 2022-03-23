@@ -11,12 +11,12 @@ import {
 
 // action to get list of all products
 export const getProducts =
-  (keyword = '') =>
+  (keyword = '', currentPage = 1) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-      const { data } = await api.fetchAllProducts(keyword);
+      const { data } = await api.fetchAllProducts(keyword, currentPage);
 
       dispatch({
         type: ALL_PRODUCTS_SUCCESS,
