@@ -21,8 +21,6 @@ const ProductDetails = () => {
 
   const { product, loading, error } = state;
 
-  // console.log(product);
-
   const options = {
     edit: false,
     color: 'rgba(20, 20, 20, 0.1)',

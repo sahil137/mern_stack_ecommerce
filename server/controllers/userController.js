@@ -4,11 +4,19 @@ import User from '../models/userModel.js';
 import { sendToken } from '../utils/jwtToken.js';
 import sendResetPasswordEmail from '../utils/nodemailer.js';
 import crypto from 'crypto';
+import cloudinary from 'cloudinary';
 
 // Register/Create the user
 export const signUp = async (req, res, next) => {
-  const { email, password, name, confirmPassword } = req.body;
+  const { email, password, name, confirmPassword, avatar } = req.body;
+
   try {
+    const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+      folder: 'avatars',
+      width: 150,
+      crop: 'scale',
+    });
+
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return next(new ErrorHandler('User already exists', 404));
@@ -22,14 +30,15 @@ export const signUp = async (req, res, next) => {
       password: hashedPassword,
       name,
       avatar: {
-        public_id: 'sample id',
-        url: 'sample url',
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
       },
     });
 
     // send jwt token using sendToken
     sendToken(user, 200, res);
   } catch (error) {
+    console.log('error', error);
     res.status(500).json({ message: error.message });
   }
 };
