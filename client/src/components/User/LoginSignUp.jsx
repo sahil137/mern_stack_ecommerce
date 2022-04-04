@@ -6,7 +6,7 @@ import { MailOutline, LockOpenOutlined, Face } from '@mui/icons-material';
 import Loader from '../Layout/Loader/Loader';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { clearError, login, register } from '../../redux/actions/userAction';
+import { login, register } from '../../redux/actions/userAction';
 import { useAlert } from 'react-alert';
 
 const LoginSignUp = () => {
@@ -90,10 +90,10 @@ const LoginSignUp = () => {
   };
 
   useEffect(() => {
-    if (error) {
-      alert.error(error);
-      dispatch(clearError());
-    }
+    // if (error) {
+    //   alert.error(error);
+    //   dispatch(clearError());
+    // }
     if (isAuthenticated) {
       navigate('/account');
     }

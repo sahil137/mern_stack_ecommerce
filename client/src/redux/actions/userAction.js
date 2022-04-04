@@ -6,6 +6,11 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   REGISTER_REQUEST,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_REQUEST,
+  LOAD_USER_FAIL,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
 } from '../../constants/userConstants';
 
 import * as api from '../../api/index';
@@ -41,6 +46,30 @@ export const register = (userData) => async (dispatch) => {
     dispatch({ type: REGISTER_SUCCESS, payload: data.user });
   } catch (error) {
     dispatch({ type: REGISTER_FAIL, payload: error.response.data.message });
+  }
+};
+
+// Load User
+export const loadUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOAD_USER_REQUEST });
+
+    const { data } = await api.getUserProfile();
+    console.log(data);
+    dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
+  } catch (error) {
+    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+  }
+};
+
+// Logout User
+
+export const logoutUser = () => async (dispatch) => {
+  try {
+    await api.logout();
+    dispatch({ type: LOGOUT_SUCCESS });
+  } catch (error) {
+    dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
   }
 };
 
