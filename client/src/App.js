@@ -13,6 +13,8 @@ import LoginSignUp from './components/User/LoginSignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './redux/actions/userAction';
 import UserOptions from './components/Layout/Header/UserOptions';
+import Profile from './components/User/Profile';
+import ProtectedRoute from './components/Route/ProtectedRoute';
 const App = () => {
   const { isAuthenticated, user } = useSelector(
     (state) => state.userAuthReducer
@@ -38,6 +40,15 @@ const App = () => {
         <Route path="/products/:keyword" element={<Products />} />
         <Route path="/search" element={<Search />} />
         <Route path="/login" element={<LoginSignUp />} />
+        {/* <ProtectedRoute path="/account" /> */}
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>
