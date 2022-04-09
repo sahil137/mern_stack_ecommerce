@@ -200,12 +200,30 @@ export const updatePassword = async (req, res, next) => {
 
 // update user details
 export const updateProfile = async (req, res, next) => {
-  const { name, email } = req.body;
+  const { name, email, avatar } = req.body;
+  const { id } = req.user;
   try {
     const newUserData = {
       name,
       email,
     };
+
+    if (avatar !== '') {
+      const existingUser = await User.findById(id);
+      const imageId = existingUser.avatar.public_id;
+      await cloudinary.v2.uploader.destroy(imageId);
+
+      const myCloud = await cloudinary.v2.uploader.upload(avatar, {
+        folder: 'avatars',
+        width: 150,
+        crop: 'scale',
+      });
+
+      newUserData.avatar = {
+        public_id: myCloud.public_id,
+        url: myCloud.secure_url,
+      };
+    }
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
       new: true,
       runValidators: true,

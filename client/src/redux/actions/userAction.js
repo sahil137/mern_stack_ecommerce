@@ -11,6 +11,9 @@ import {
   LOAD_USER_FAIL,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  UPDATE_USER_PROFILE_FAIL,
+  UPDATE_USER_PROFILE_REQUEST,
+  UPDATE_USER_PROFILE_SUCCESS,
 } from '../../constants/userConstants';
 
 import * as api from '../../api/index';
@@ -69,6 +72,26 @@ export const logoutUser = () => async (dispatch) => {
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: LOGOUT_FAIL, payload: error.response.data.message });
+  }
+};
+
+// update user details
+
+export const updateUserProfile = (userData) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_USER_PROFILE_REQUEST });
+    const config = { headers: { 'Content-Type': 'multipart/form-data' } };
+
+    const { data } = await api.updateProfile(userData, config);
+
+    console.log('Data', data);
+
+    dispatch({ type: UPDATE_USER_PROFILE_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_USER_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
   }
 };
 

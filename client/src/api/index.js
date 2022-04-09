@@ -31,8 +31,11 @@ export const registerUser = (userData, config) =>
   axios.post('/api/v1/users/register', userData, { config });
 
 // logout user
-
 export const logout = () => axios.get('/api/v1/users/logout');
+
+// update user details
+export const updateProfile = (userData, config) =>
+  axios.patch('/api/v1/users/userProfile/update', userData, { config });
 
 // get request to get user profile
 

@@ -12,7 +12,7 @@ const Footer = () => {
         <img src={appStore} alt="App Store" />
       </div>
       <div className="mid-footer">
-        <h1>Binkart</h1>
+        <h1>Blinkart</h1>
         <p>Quality with Quantity</p>
 
         <p>Copyrights 2022 &copy; Sahil</p>

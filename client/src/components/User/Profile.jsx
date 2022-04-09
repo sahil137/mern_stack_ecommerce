@@ -25,7 +25,7 @@ const Profile = () => {
             <div>
               <h1>My Profile</h1>
               <img src={user.avatar.url} alt="Avatar" />
-              <Link to="/users/updateProfile">Edit Profile</Link>
+              <Link to="/updateProfile">Edit Profile</Link>
             </div>
             <div>
               <div>
