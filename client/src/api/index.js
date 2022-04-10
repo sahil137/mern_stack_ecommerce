@@ -37,6 +37,11 @@ export const logout = () => axios.get('/api/v1/users/logout');
 export const updateProfile = (userData, config) =>
   axios.patch('/api/v1/users/userProfile/update', userData, { config });
 
+// update password
+
+export const updatePassword = (password, config) =>
+  axios.patch('/api/v1/users/password/update', password, { config });
+
 // get request to get user profile
 
 export const getUserProfile = () => axios.get('/api/v1/users/userProfile');

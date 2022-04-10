@@ -16,6 +16,7 @@ import UserOptions from './components/Layout/Header/UserOptions';
 import Profile from './components/User/Profile';
 import ProtectedRoute from './components/Route/ProtectedRoute';
 import UpdateProfile from './components/User/UpdateProfile';
+import UpdatePassword from './components/User/UpdatePassword';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
@@ -55,6 +56,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/updatePassword"
+          element={
+            <ProtectedRoute>
+              <UpdatePassword />
             </ProtectedRoute>
           }
         />

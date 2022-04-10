@@ -14,6 +14,9 @@ import {
   UPDATE_USER_PROFILE_FAIL,
   UPDATE_USER_PROFILE_REQUEST,
   UPDATE_USER_PROFILE_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
 } from '../../constants/userConstants';
 
 import * as api from '../../api/index';
@@ -90,6 +93,26 @@ export const updateUserProfile = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_USER_PROFILE_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// update password
+
+export const updatePassword = (password) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
+    const config = { headers: { 'Content-Type': 'application/json' } };
+
+    const { data } = await api.updatePassword(password, config);
+
+    console.log('Data', data);
+
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
       payload: error.response.data.message,
     });
   }

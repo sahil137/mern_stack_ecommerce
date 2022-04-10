@@ -38,7 +38,7 @@ const Profile = () => {
               </div>
               <div>
                 <Link to="/orders">My Orders</Link>
-                <Link to="/password/update">Update Password</Link>
+                <Link to="/updatePassword">Update Password</Link>
               </div>
             </div>
           </div>
