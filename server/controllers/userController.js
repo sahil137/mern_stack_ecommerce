@@ -5,6 +5,9 @@ import { sendToken } from '../utils/jwtToken.js';
 import sendResetPasswordEmail from '../utils/nodemailer.js';
 import crypto from 'crypto';
 import cloudinary from 'cloudinary';
+import dotenv from 'dotenv';
+
+dotenv.config({ path: 'server/config/.env' });
 
 // Register/Create the user
 export const signUp = async (req, res, next) => {
@@ -96,9 +99,7 @@ export const forgotPassword = async (req, res, next) => {
 
   await user.save({ validateBeforeSave: false });
 
-  const resetPasswordUrl = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/password/reset/${resetToken}`;
+  const resetPasswordUrl = `${process.env.FRONTEND_URL}/resetPassword/${resetToken}`;
 
   const message = `Click here to reset your password:- \n\n ${resetPasswordUrl} \n\nIf you have not requested this email then, please ignore it.`;
   try {
