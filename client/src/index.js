@@ -1,6 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { positions, transitions, Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
+
+const options = {
+  timeout: 5000,
+  position: positions.BOTTOM_CENTER,
+  transition: transitions.SCALE,
+};
+
+ReactDOM.render(
+  <Provider store={store}>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </AlertProvider>
+  </Provider>,
+  document.getElementById('root')
+);

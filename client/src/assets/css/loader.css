@@ -1,0 +1,24 @@
+.loader {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader div {
+  width: 10vmax;
+  height: 10vmax;
+  padding: 1rem;
+  border-bottom: 5px solid #3027ae;
+  border-radius: 50%;
+  animation: loading 450ms linear infinite;
+}
+
+@keyframes loading {
+  to {
+    /* Will rotate along Z axis */
+    transform: rotateZ(360deg);
+  }
+}

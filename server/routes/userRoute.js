@@ -19,9 +19,9 @@ const router = express.Router();
 
 router.post('/register', signUp);
 router.post('/login', signIn);
-router.get('/logOut', signOut);
+router.get('/logout', signOut);
 router.post('/password/forgot', forgotPassword);
-router.post('/password/reset/:token', resetPassword);
+router.patch('/password/reset/:token', resetPassword);
 router.patch('/password/update', isUserAuthenticated, updatePassword);
 router.get('/userProfile', isUserAuthenticated, getUserDetails);
 router.patch('/userProfile/update', isUserAuthenticated, updateProfile);

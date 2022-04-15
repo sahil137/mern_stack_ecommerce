@@ -19,14 +19,26 @@ export const createProduct = async (req, res, next) => {
 // get all products
 export const getProducts = async (req, res, next) => {
   try {
-    const resultPerPage = 5;
+    const resultPerPage = 8;
     const numberOfProducts = await Product.countDocuments();
     const apiFeature = new ApiFeatures(Product.find(), req.query)
       .search()
-      .filter()
-      .pagination(resultPerPage);
-    const products = await apiFeature.query;
-    res.status(200).json({ success: true, products, numberOfProducts });
+      .filter();
+    let products = await apiFeature.query;
+
+    let filteredProductsCount = products.length;
+
+    apiFeature.pagination(resultPerPage);
+
+    products = await apiFeature.query.clone();
+
+    res.status(200).json({
+      success: true,
+      products,
+      numberOfProducts,
+      resultPerPage,
+      filteredProductsCount,
+    });
   } catch (error) {
     return next(new ErrorHandler(error.message, 404));
   }
@@ -41,6 +53,7 @@ export const getProductDetails = async (req, res, next) => {
     if (!product) {
       return next(new ErrorHandler('Product not Found', 404));
     }
+    // console.log(product);
     res.status(200).json({ success: true, product });
   } catch (error) {
     return next(new ErrorHandler(error.message, 404));
