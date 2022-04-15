@@ -6,7 +6,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from '../redux/reducers';
 
-let initialState = {};
+let initialState = {
+  cartReducer: {
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : [],
+  },
+};
+
 const middleware = [thunk];
 const store = createStore(
   rootReducer,

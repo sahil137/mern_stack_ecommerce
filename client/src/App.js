@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './App.css';
-// import { Route, Routes } from 'react-router-dom';
 import WebFont from 'webfontloader';
 import Header from './components/Layout/Header/Header';
 import Footer from './components/Layout/Footer/Footer';
@@ -19,6 +18,7 @@ import UpdateProfile from './components/User/UpdateProfile';
 import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
+import Cart from './components/Cart/Cart';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
@@ -47,6 +47,7 @@ const App = () => {
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
+        <Route path="/cart" element={<Cart />} />
         <Route
           path="/account"
           element={
