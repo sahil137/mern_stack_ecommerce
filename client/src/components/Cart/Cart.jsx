@@ -9,17 +9,17 @@ import '../../assets/css/cart.css';
 import CartItem from './CartItem';
 
 import EmptyCart from './EmptyCart';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const alert = useAlert();
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const data = useSelector((state) => state.cartReducer);
-
   const { cartItems } = data;
 
-  console.log(cartItems);
+  // console.log(cartItems);
 
   const handleIncreaseQuantity = (id, quantity, stock) => {
     const newQty = quantity + 1;
@@ -46,7 +46,9 @@ const Cart = () => {
     dispatch(removeItemFromCart(id));
   };
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    navigate('/shipping');
+  };
 
   return (
     <>

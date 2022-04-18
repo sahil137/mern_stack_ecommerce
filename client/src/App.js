@@ -19,12 +19,27 @@ import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
 import Cart from './components/Cart/Cart';
+import ShippingInfo from './components/Cart/ShippingInfo';
+import ConfirmOrder from './components/Cart/ConfirmOrder';
+import Payment from './components/Cart/Payment';
+// import { Elements } from '@stripe/react-stripe-js';
+// import { loadStripe } from '@stripe/stripe-js';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
     (state) => state.userAuthReducer
   );
 
+  // const [stripeApiKey, setStripeApiKey] = useState('');
+
+  // async function getStripeApiKey() {
+  //   const response = await api.getStripeApiKey();
+  //   console.log(response);
+  //   const { data } = response;
+  //   setStripeApiKey(data.stripeApiKey);
+  // }
+
+  // const stripePromise = loadStripe(stripeApiKey);
   const dispatch = useDispatch();
   useEffect(() => {
     WebFont.load({
@@ -38,6 +53,7 @@ const App = () => {
     <>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -48,6 +64,7 @@ const App = () => {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order/confirm" element={<ConfirmOrder />} />
         <Route
           path="/account"
           element={
@@ -69,6 +86,23 @@ const App = () => {
           element={
             <ProtectedRoute>
               <UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/shipping"
+          element={
+            <ProtectedRoute>
+              <ShippingInfo />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/process-payment"
+          element={
+            <ProtectedRoute>
+              <Payment />
             </ProtectedRoute>
           }
         />

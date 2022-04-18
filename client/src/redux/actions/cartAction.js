@@ -3,6 +3,7 @@ import * as api from '../../api/index';
 import {
   ADD_TO_CART,
   REMOVE_ITEM_FROM_CART,
+  SAVE_SHIPPING_INFO,
 } from '../../constants/cartConstants';
 
 // add items to cart
@@ -28,7 +29,6 @@ export const addItemsToCart = (id, quantity) => async (dispatch, getState) => {
 };
 
 // remove item from cart
-
 export const removeItemFromCart = (id) => async (dispatch, getState) => {
   dispatch({ type: REMOVE_ITEM_FROM_CART, payload: id });
 
@@ -36,4 +36,12 @@ export const removeItemFromCart = (id) => async (dispatch, getState) => {
     'cartItems',
     JSON.stringify(getState().cartReducer.cartItems)
   );
+};
+
+// save shipping info
+
+export const saveShippingInfo = (info) => async (dispatch) => {
+  dispatch({ type: SAVE_SHIPPING_INFO, payload: info });
+
+  localStorage.setItem('shippingInfo', JSON.stringify(info));
 };
