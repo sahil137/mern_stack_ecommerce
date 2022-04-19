@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -12,14 +12,33 @@ import Loader from '../Layout/Loader/Loader';
 import ReviewCard from './ReviewCard';
 import { useAlert } from 'react-alert';
 import MetaData from '../Layout/MetaData';
+import { addItemsToCart } from '../../redux/actions/cartAction';
 
 const ProductDetails = () => {
+  const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
   const alert = useAlert();
   const { id } = useParams();
   const state = useSelector((state) => state.productDetailsReducer);
 
   const { product, loading, error } = state;
+
+  const increaseQuantity = () => {
+    if (product.stock <= quantity) {
+      alert.info('Max Quantity reached');
+      return;
+    }
+    let qty = quantity + 1;
+    setQuantity(qty);
+  };
+
+  const decreaseQuantity = () => {
+    if (quantity === 1) {
+      return;
+    }
+    let qty = quantity - 1;
+    setQuantity(qty);
+  };
 
   const options = {
     edit: false,
@@ -28,6 +47,11 @@ const ProductDetails = () => {
     value: product.rating,
     isHalf: true,
     size: 20,
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addItemsToCart(id, quantity));
+    alert.success('Item Added to cart successfully');
   };
 
   useEffect(() => {
@@ -76,11 +100,11 @@ const ProductDetails = () => {
                 <h2>{`₹${product.price}`}</h2>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
-                    <button>-</button>
-                    <input type="number" value="1" />
-                    <button>+</button>
+                    <button onClick={decreaseQuantity}>-</button>
+                    <input value={quantity} type="number" readOnly />
+                    <button onClick={increaseQuantity}>+</button>
                   </div>
-                  <button>Add to Cart</button>
+                  <button onClick={handleAddToCart}>Add to Cart</button>
                 </div>
                 <p>Status</p>
                 <strong

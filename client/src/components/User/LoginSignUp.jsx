@@ -70,8 +70,6 @@ const LoginSignUp = () => {
     }
   };
 
-  // const redirect = location.search ? location.search.split('=')[1] : '/account';
-
   const switchTabs = (e, tab) => {
     if (tab === 'Login') {
       switcherTab.current.classList.add('shiftToNeutral');

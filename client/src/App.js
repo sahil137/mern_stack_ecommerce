@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import './App.css';
-// import { Route, Routes } from 'react-router-dom';
 import WebFont from 'webfontloader';
 import Header from './components/Layout/Header/Header';
 import Footer from './components/Layout/Footer/Footer';
@@ -19,6 +18,11 @@ import UpdateProfile from './components/User/UpdateProfile';
 import UpdatePassword from './components/User/UpdatePassword';
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from './components/User/ResetPassword';
+import Cart from './components/Cart/Cart';
+import ShippingInfo from './components/Cart/ShippingInfo';
+import ConfirmOrder from './components/Cart/ConfirmOrder';
+import Payment from './components/Cart/Payment';
+import PaymentSuccess from './components/Cart/PaymentSuccess';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
@@ -38,6 +42,7 @@ const App = () => {
     <>
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product/:id" element={<ProductDetails />} />
@@ -47,6 +52,8 @@ const App = () => {
         <Route path="/login" element={<LoginSignUp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/resetPassword/:token" element={<ResetPassword />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/order/confirm" element={<ConfirmOrder />} />
         <Route
           path="/account"
           element={
@@ -68,6 +75,31 @@ const App = () => {
           element={
             <ProtectedRoute>
               <UpdatePassword />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/shipping"
+          element={
+            <ProtectedRoute>
+              <ShippingInfo />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/process-payment"
+          element={
+            <ProtectedRoute>
+              <Payment />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccess />
             </ProtectedRoute>
           }
         />

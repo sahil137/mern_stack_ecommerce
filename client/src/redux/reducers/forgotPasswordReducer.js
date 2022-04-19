@@ -8,7 +8,7 @@ import {
   CLEAR_ERRORS,
 } from '../../constants/userConstants';
 
-export const forgotPasswordReducer = (state = {}, action) => {
+const forgotPasswordReducer = (state = {}, action) => {
   switch (action.type) {
     case FORGOT_PASSWORD_REQUEST:
     case RESET_PASSWORD_REQUEST:
@@ -47,3 +47,5 @@ export const forgotPasswordReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export default forgotPasswordReducer;
