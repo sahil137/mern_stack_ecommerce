@@ -22,24 +22,13 @@ import Cart from './components/Cart/Cart';
 import ShippingInfo from './components/Cart/ShippingInfo';
 import ConfirmOrder from './components/Cart/ConfirmOrder';
 import Payment from './components/Cart/Payment';
-// import { Elements } from '@stripe/react-stripe-js';
-// import { loadStripe } from '@stripe/stripe-js';
+import PaymentSuccess from './components/Cart/PaymentSuccess';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
     (state) => state.userAuthReducer
   );
 
-  // const [stripeApiKey, setStripeApiKey] = useState('');
-
-  // async function getStripeApiKey() {
-  //   const response = await api.getStripeApiKey();
-  //   console.log(response);
-  //   const { data } = response;
-  //   setStripeApiKey(data.stripeApiKey);
-  // }
-
-  // const stripePromise = loadStripe(stripeApiKey);
   const dispatch = useDispatch();
   useEffect(() => {
     WebFont.load({
@@ -103,6 +92,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Payment />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccess />
             </ProtectedRoute>
           }
         />

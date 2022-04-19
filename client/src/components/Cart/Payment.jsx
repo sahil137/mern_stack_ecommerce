@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import MetaData from '../Layout/MetaData';
 import CheckoutBar from './CheckoutBar';
 
@@ -10,31 +10,43 @@ import {
   CardCvcElement,
   CardExpiryElement,
 } from '@stripe/react-stripe-js';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import * as api from '../../api/index';
 import { useStripe } from '@stripe/react-stripe-js';
 import { useElements } from '@stripe/react-stripe-js';
 import { useNavigate } from 'react-router-dom';
+import { clearErrors, createOrder } from '../../redux/actions/orderActions';
 
 const Payment = () => {
   const navigate = useNavigate();
   const alert = useAlert();
   const stripe = useStripe();
   const elements = useElements();
+  const dispatch = useDispatch();
   const payButton = useRef(null);
   const orderInfo = JSON.parse(sessionStorage.getItem('orderInfo'));
   const shippingInfo = JSON.parse(localStorage.getItem('shippingInfo'));
-  // const cartState = useSelector((state) => state.cartReducer);
+  const cartState = useSelector((state) => state.cartReducer);
   const userState = useSelector((state) => state.userAuthReducer);
-
+  const orderState = useSelector((state) => state.orderReducer);
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   };
 
   const { user } = userState;
+  const { error } = orderState;
+  const { cartItems } = cartState;
   const { name, email } = user;
 
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subTotal,
+    tax: orderInfo.gst,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
   const handlePaymentSubmit = async (event) => {
     event.preventDefault();
 
@@ -76,7 +88,12 @@ const Payment = () => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === 'succeeded') {
-          navigate('/success');
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrder(order));
+          navigate('/payment-success');
         } else {
           alert.error(
             'There is some issue with processing your payment please try again later'
@@ -88,6 +105,13 @@ const Payment = () => {
       alert.error(error.response.data.message);
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, alert, error]);
 
   return (
     <>

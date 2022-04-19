@@ -60,6 +60,11 @@ export const fetchAllProductsCategory = (
 // add items to cart (get product details)
 export const addItemsToCart = (id) => axios.get(`/api/v1/products/${id}`);
 
+// ********************* ORDER REQUEST ************************//
+
+export const createNewOrder = (order, config) =>
+  axios.post('/api/v1/orders/new', order, { config });
+
 // ************************ PAYMENT **********************//
 
 export const getStripeApiKey = () =>
