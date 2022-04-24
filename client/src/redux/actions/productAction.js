@@ -7,6 +7,9 @@ import {
   PRODUCTS_DETAILS_FAIL,
   PRODUCTS_DETAILS_REQUEST,
   PRODUCTS_DETAILS_SUCCESS,
+  NEW_REVIEW_REQUEST,
+  NEW_REVIEW_SUCCESS,
+  NEW_REVIEW_FAIL,
 } from '../../constants/productConstants';
 
 // action to get list of all products
@@ -38,6 +41,7 @@ export const getProducts =
     }
   };
 
+// get product details request
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCTS_DETAILS_REQUEST });
@@ -53,6 +57,18 @@ export const getProductDetails = (id) => async (dispatch) => {
       type: PRODUCTS_DETAILS_FAIL,
       payload: error.message,
     });
+  }
+};
+
+// new product review
+export const newProductReview = (reviewData) => async (dispatch) => {
+  try {
+    dispatch({ type: NEW_REVIEW_REQUEST });
+    const config = { headers: { 'Content-type': 'application/json' } };
+    const { data } = await api.newProductReview(reviewData, config);
+    dispatch({ type: NEW_REVIEW_SUCCESS, payload: data.success });
+  } catch (error) {
+    dispatch({ type: NEW_REVIEW_FAIL, payload: error.response.data.message });
   }
 };
 

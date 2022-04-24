@@ -16,6 +16,7 @@ const ReviewCard = (props) => {
       <img src={userProfile} alt="Profile Avatar" />
       <p>{review.name}</p>
       <ReactStars {...options} />
+      <span className="reviewCardComment">{review.comment}</span>
     </div>
   );
 };

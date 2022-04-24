@@ -55,6 +55,10 @@ export const fetchAllProductsCategory = (
     `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&rating[gte]=${rating}`
   );
 
+// new review request
+export const newProductReview = (review, config) =>
+  axios.put('/api/v1/products/review', review, { config });
+
 // ********************** CART REQUESTS ***********************//
 
 // add items to cart (get product details)
