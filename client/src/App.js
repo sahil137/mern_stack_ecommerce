@@ -23,6 +23,8 @@ import ShippingInfo from './components/Cart/ShippingInfo';
 import ConfirmOrder from './components/Cart/ConfirmOrder';
 import Payment from './components/Cart/Payment';
 import PaymentSuccess from './components/Cart/PaymentSuccess';
+import UserOrders from './components/Orders/UserOrders';
+import OrderDetails from './components/Orders/OrderDetails';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
@@ -100,6 +102,22 @@ const App = () => {
           element={
             <ProtectedRoute>
               <PaymentSuccess />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <UserOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/order/:id"
+          element={
+            <ProtectedRoute>
+              <OrderDetails />
             </ProtectedRoute>
           }
         />

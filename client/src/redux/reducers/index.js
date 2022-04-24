@@ -6,6 +6,8 @@ import userProfileReducer from './userProfileReducer';
 import forgotPasswordReducer from './forgotPasswordReducer';
 import cartReducer from './cartReducer';
 import orderReducer from './orderReducer';
+import userOrderReducer from './userOrderReducer';
+import orderDetailsReducer from './orderDetailsReducer';
 
 const reducer = combineReducers({
   productReducer,
@@ -15,6 +17,8 @@ const reducer = combineReducers({
   forgotPasswordReducer,
   cartReducer,
   orderReducer,
+  userOrderReducer,
+  orderDetailsReducer,
 });
 
 export default reducer;

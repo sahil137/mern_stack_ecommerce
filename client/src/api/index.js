@@ -61,14 +61,24 @@ export const fetchAllProductsCategory = (
 export const addItemsToCart = (id) => axios.get(`/api/v1/products/${id}`);
 
 // ********************* ORDER REQUEST ************************//
-
+// create new order
 export const createNewOrder = (order, config) =>
   axios.post('/api/v1/orders/new', order, { config });
 
+// get user orders
+export const getUserOrder = () => axios.get('/api/v1/orders/myOrders');
+
+// get single order details
+
+export const getOrderDetails = (id) =>
+  axios.get(`/api/v1/orders/orderDetails/${id}`);
+
 // ************************ PAYMENT **********************//
 
+// get stripe api key
 export const getStripeApiKey = () =>
   axios.get('/api/v1/payment/getStripeApiKey');
 
+// process payment
 export const processPayment = (paymentData, config) =>
   axios.post('/api/v1/payment/process', paymentData, { config });

@@ -92,6 +92,7 @@ const Payment = () => {
             id: result.paymentIntent.id,
             status: result.paymentIntent.status,
           };
+          localStorage.setItem('cartItems', '');
           dispatch(createOrder(order));
           navigate('/payment-success');
         } else {
