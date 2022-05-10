@@ -59,6 +59,15 @@ export const fetchAllProductsCategory = (
 export const newProductReview = (review, config) =>
   axios.put('/api/v1/products/review', review, { config });
 
+// all products request :: ADMIN
+export const getAllProductsAdmin = () =>
+  axios.get('/api/v1/products/admin/getAdminProducts');
+
+// create new product :: ADMIN
+
+export const createNewProduct = (productData, config) =>
+  axios.post('/api/v1/products/create', productData, { config });
+
 // ********************** CART REQUESTS ***********************//
 
 // add items to cart (get product details)

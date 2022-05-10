@@ -25,6 +25,9 @@ import Payment from './components/Cart/Payment';
 import PaymentSuccess from './components/Cart/PaymentSuccess';
 import UserOrders from './components/Orders/UserOrders';
 import OrderDetails from './components/Orders/OrderDetails';
+import Dashboard from './components/Admin/Dashboard';
+import ProductList from './components/Admin/ProductList';
+import NewProduct from './components/Admin/NewProduct';
 
 const App = () => {
   const { isAuthenticated, user } = useSelector(
@@ -118,6 +121,30 @@ const App = () => {
           element={
             <ProtectedRoute>
               <OrderDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/products"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <ProductList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/create-product"
+          element={
+            <ProtectedRoute isAdmin={true}>
+              <NewProduct />
             </ProtectedRoute>
           }
         />

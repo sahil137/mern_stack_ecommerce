@@ -38,6 +38,11 @@ const options = {
   searchIconColorHover: '#eb4034',
   cartIconColorHover: '#eb4034',
   cartIconMargin: '3vmax',
+  // nav1Transition: '3',
+  // nav2Transition: '3',
+  // nav3Transition: '3',
+  // nav4Transition: '3',
+  logoAnimationTime: '3',
 };
 
 const Header = () => {

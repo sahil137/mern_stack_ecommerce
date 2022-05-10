@@ -9,6 +9,7 @@ import orderReducer from './orderReducer';
 import userOrderReducer from './userOrderReducer';
 import orderDetailsReducer from './orderDetailsReducer';
 import { newReviewReducer } from './productReviewReducer';
+import newProductReducer from './newProductReducer';
 
 const reducer = combineReducers({
   productReducer,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   userOrderReducer,
   orderDetailsReducer,
   newReviewReducer,
+  newProductReducer,
 });
 
 export default reducer;

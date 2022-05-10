@@ -10,6 +10,12 @@ import {
   NEW_REVIEW_REQUEST,
   NEW_REVIEW_SUCCESS,
   NEW_REVIEW_FAIL,
+  ADMIN_PRODUCT_LIST_FAIL,
+  ADMIN_PRODUCT_LIST_REQUEST,
+  ADMIN_PRODUCT_LIST_SUCCESS,
+  ADMIN_NEW_PRODUCT_FAIL,
+  ADMIN_NEW_PRODUCT_REQUEST,
+  ADMIN_NEW_PRODUCT_SUCCESS,
 } from '../../constants/productConstants';
 
 // action to get list of all products
@@ -69,6 +75,41 @@ export const newProductReview = (reviewData) => async (dispatch) => {
     dispatch({ type: NEW_REVIEW_SUCCESS, payload: data.success });
   } catch (error) {
     dispatch({ type: NEW_REVIEW_FAIL, payload: error.response.data.message });
+  }
+};
+
+// get all products :: ADMIN
+export const getAllProductsAdmin = () => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_PRODUCT_LIST_REQUEST });
+
+    const { data } = await api.getAllProductsAdmin();
+    console.log('data', data);
+
+    dispatch({ type: ADMIN_PRODUCT_LIST_SUCCESS, payload: data.products });
+  } catch (error) {
+    dispatch({
+      type: ADMIN_PRODUCT_LIST_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// create new product :: ADMIN
+
+export const createNewProduct = (productData) => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_NEW_PRODUCT_REQUEST });
+
+    const config = { headers: { 'Content-type': 'application/json' } };
+
+    const { data } = await api.createNewProduct(productData, config);
+
+    console.log(data);
+
+    dispatch({ type: ADMIN_NEW_PRODUCT_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: ADMIN_NEW_PRODUCT_FAIL });
   }
 };
 

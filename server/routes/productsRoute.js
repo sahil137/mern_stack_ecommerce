@@ -4,6 +4,7 @@ import {
   createProductReview,
   deleteProduct,
   deleteReview,
+  getAllAdminProducts,
   getProductDetails,
   getProductReviews,
   getProducts,
@@ -18,6 +19,13 @@ router.get('/:id', getProductDetails);
 router.put('/review', isUserAuthenticated, createProductReview);
 router.get('/review/:id', getProductReviews);
 router.delete('/review', isUserAuthenticated, deleteReview);
+
+router.get(
+  '/admin/getAdminProducts',
+  isUserAuthenticated,
+  userAuthRoles('admin'),
+  getAllAdminProducts
+);
 router.post(
   '/create',
   isUserAuthenticated,
